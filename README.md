@@ -2,9 +2,9 @@
 
 ## Dependencies
 This project uses [gradle](http://www.gradle.org) as it's build tool
+
 [Fatjar plugin](https://github.com/musketyr/gradle-fatjar-plugin) for
 bundling jars
-Cloudera Repo for hadoop related
 
 ## Compile
 
