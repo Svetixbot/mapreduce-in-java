@@ -1,4 +1,8 @@
+package au.com.data.wordscount;
+
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -19,9 +23,9 @@ import org.apache.hadoop.util.ToolRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Template extends Configured implements Tool
+public class WordsCount extends Configured implements Tool
 {
-    private static final Logger logger = LoggerFactory.getLogger(Template.class);
+    private static final Logger logger = LoggerFactory.getLogger(WordsCount.class);
 
     public static class MapClass extends Mapper<LongWritable, Text, Text, LongWritable>
     {
@@ -39,17 +43,14 @@ public class Template extends Configured implements Tool
         public void map(LongWritable key, Text text, Mapper<LongWritable, Text, Text, LongWritable>.Context
                 context) throws IOException, InterruptedException
         {
-            //example map code
-            /*
             String regex = context.getConfiguration().get("wordcount.regex", "[A-Za-z']+");
             Pattern p = Pattern.compile(regex);
-            Matcher m = p.matcher(value.toString());
+            Matcher m = p.matcher(text.toString());
 
             while(m.find()){
                 word.set(m.group().toLowerCase());
                 context.write(word, one);
             }
-            */
         }
     }
 
@@ -68,14 +69,11 @@ public class Template extends Configured implements Tool
         protected void reduce(Text key, Iterable<LongWritable> values, Context context)
                 throws IOException, InterruptedException
         {
-            //example reduce code
-            /*
             long sum = 0;
             for(LongWritable val : values){
                 sum += val.get();
             }
             context.write(key, new LongWritable(sum));
-            */
         }
     }
 
@@ -86,7 +84,7 @@ public class Template extends Configured implements Tool
         Configuration conf = new Configuration();
         Job job = new Job(conf);
 
-        job.setJarByClass(Template.class);
+        job.setJarByClass(WordsCount.class);
         job.setMapperClass(MapClass.class);
         job.setReducerClass(ReduceClass.class);
 
@@ -107,7 +105,7 @@ public class Template extends Configured implements Tool
 
     public static void main(String[] args) throws Exception
     {
-        int res = ToolRunner.run(new Configuration(), new Template(), args);
+        int res = ToolRunner.run(new Configuration(), new WordsCount(), args);
         System.exit(res);
     }
 
