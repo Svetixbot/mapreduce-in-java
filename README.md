@@ -9,7 +9,7 @@ gradle fatjar
 
 ## Copy it over to the client
 ```sh
-scp build/libs/mapreducer.jar <username>@52.64.87.104:/home/<username>/...
+scp build/libs/mapreducer.jar <username>@<host>:/home/<username>/...
 ```
 
 ## Create some data in hdfs
@@ -41,8 +41,10 @@ List of repair, vehicle type, currency and operation cost (TABLE 2)
 The new sales boss likes the report you generated but has noticed that the monetary values of the different repairs were in reported in different currencies. He wants them to be converted into USD to report consistently. So your task is to convert these figures from their existing currencies into USD by writing a Hadoop Map Reduce program.
 The going exchange rate for these currencies is specified as below:
 
-USD -> USD -> 1
-Euro -> USD -> 1.15
-GBP -> USD -> 1.58
-INR -> USD -> 0.015
-Other -> USD -> 1
+| From        | To           | Factor  |
+| ------------- |:-------------:| -----:|
+| USD      | USD | 1 |
+| Euro      | USD      |  1.15 |
+| GBP | USD     |    1.58 |
+| INR | USD      |    0.015 |
+| Other | USD      |    1 |
