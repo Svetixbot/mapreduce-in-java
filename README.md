@@ -1,4 +1,4 @@
-# Hadoop MapReduce Words count example
+# Hadoop MapReduce Java template
 
 
 ## Build the jar
