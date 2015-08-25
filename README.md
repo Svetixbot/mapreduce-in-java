@@ -28,14 +28,14 @@ hadoop jar mapreducer.jar au.com.data.wordscount.WordsCount wordcount/input word
 ## Exercise 1
 AutoWorx is an automobile dealer who specializes selling and servicing 4 kinds of vehicles namely buses, trucks, cars and rickshaws. The company has a new sales boss who is interested in knowing how many vehicles of each type AutoWorx has sold till date. Your task is to write a Hadoop MapReduce program to generate this report.
 
-[Input]() - List of vehicles with their type, registration number, date of purchase and owner
+[Input](https://github.com/Svetixbot/mapreduce-in-java/blob/master/src/main/resources/VEHICLE_INFO) - List of vehicles with their type, registration number, date of purchase and owner
 Output - Vehicle type, Total count
 
 ## Exercise 2
 The new sales boss at AutoWorx now wants some insight on potential service opportunities that are associated with different types of vehicles. Your task is to determine all the repairs that are applicable for a vehicle along with their monetary values by writing a Hadoop Map Reduce program.
-Input Dataset -
-List of vehicles with their type, registration number, date of purchase and owner (TABLE 1)
-List of repair, vehicle type, currency and operation cost (TABLE 2)
+Input Dataset
+[List of vehicles with their type, registration number, date of purchase and owner](src/main/resources/VEHICLE_INFO)
+[List of repair, vehicle type, currency and operation cost](src/main/resources/REPAIR_IN_DIFFERENT_CURRENCIES)
 
 ## Exercise 3
 The new sales boss likes the report you generated but has noticed that the monetary values of the different repairs were in reported in different currencies. He wants them to be converted into USD to report consistently. So your task is to convert these figures from their existing currencies into USD by writing a Hadoop Map Reduce program.
