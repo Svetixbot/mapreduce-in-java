@@ -37,6 +37,10 @@ Input Dataset
 * [List of vehicles with their type, registration number, date of purchase and owner](src/main/resources/VEHICLE_INFO)
 * [List of repair, vehicle type, currency and operation cost](src/main/resources/REPAIR_IN_DIFFERENT_CURRENCIES)
 
+* Output:
+
+
+
 ## Exercise 3
 The new sales boss likes the report you generated but has noticed that the monetary values of the different repairs were in reported in different currencies. He wants them to be converted into USD to report consistently. So your task is to convert these figures from their existing currencies into USD by writing a Hadoop Map Reduce program.
 The going exchange rate for these currencies is specified as below:

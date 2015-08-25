@@ -33,13 +33,6 @@ public class WordsCount extends Configured implements Tool
         private Text word = new Text();
 
         @Override
-        protected void setup(Mapper<LongWritable, Text, Text, LongWritable>.Context context)
-                throws IOException, InterruptedException
-        {
-            super.setup(context);
-        }
-
-        @Override
         public void map(LongWritable key, Text text, Mapper<LongWritable, Text, Text, LongWritable>.Context
                 context) throws IOException, InterruptedException
         {
@@ -56,15 +49,6 @@ public class WordsCount extends Configured implements Tool
 
     public static class ReduceClass extends Reducer<Text, LongWritable, Text, LongWritable>
     {
-      public ReduceClass(){}
-
-        @Override
-        protected void setup(Reducer<Text, LongWritable, Text, LongWritable>.Context context)
-                throws IOException, InterruptedException
-        {
-            super.setup(context);
-        }
-
         @Override
         protected void reduce(Text key, Iterable<LongWritable> values, Context context)
                 throws IOException, InterruptedException
