@@ -1,6 +1,7 @@
 package au.com.data.wordscount;
 
 import java.io.IOException;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,10 +41,13 @@ public class WordsCount extends Configured implements Tool
         }
 
         @Override
-        public void map(LongWritable key, Text text, Mapper<LongWritable, Text, Text, LongWritable>.Context
-                context) throws IOException, InterruptedException
+        public void map(LongWritable key, Text text, Mapper<LongWritable, Text, Text, LongWritable>.Context context) throws IOException, InterruptedException
         {
-            
+            // e.g. TRUCK,3021a8e,ROSS,2007-07-31
+            String line = text.toString();
+            String[] tokens = line.split(",");
+            word.set(tokens[0]);
+            context.write(word, one);
         }
     }
 
@@ -62,7 +66,11 @@ public class WordsCount extends Configured implements Tool
         protected void reduce(Text key, Iterable<LongWritable> values, Context context)
                 throws IOException, InterruptedException
         {
-
+            long sum = 0L;
+            for (LongWritable value : values) {
+                sum += value.get();
+            }
+            context.write(key, new LongWritable(sum));
         }
     }
 
@@ -72,6 +80,21 @@ public class WordsCount extends Configured implements Tool
         logger.warn("Starting map/reduce job");
         Configuration conf = new Configuration();
         Job job = new Job(conf);
+
+        job.setJarByClass(WordsCount.class);
+        job.setMapperClass(MapClass.class);
+        job.setReducerClass(ReduceClass.class);
+
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(LongWritable.class);
+
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
+
+        FileInputFormat.setInputPaths(job, new Path(args[0]));
+        Path outPath = new Path(args[1]);
+        FileOutputFormat.setOutputPath(job, outPath);
+
         return job.waitForCompletion(true) ? 0 : 1;
     }
 
