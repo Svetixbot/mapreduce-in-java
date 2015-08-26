@@ -1,6 +1,10 @@
 *.iml
 *.ipr
 *.iws
-.idea/
-build/
+.classpath
 .gradle/
+.idea/
+.project
+.settings/
+bin/
+build/
